@@ -1,20 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:sport_team_manager/routes/routes.dart';
 
 class App extends StatelessWidget {
+  const App({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Material App',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Material App Bar'),
-        ),
-        body: Center(
-          child: Container(
-            child: Text('Hello World'),
-          ),
-        ),
-      ),
+      title: 'App title',
+      initialRoute: '/splashscreen',
+      routes: routeMap,
     );
   }
 }
