@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sport_team_manager/ui/screen/news_tab_screen/widget/post_card_widget.dart';
 
