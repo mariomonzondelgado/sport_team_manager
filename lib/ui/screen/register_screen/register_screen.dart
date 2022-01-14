@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sport_team_manager/util/text_utils.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -45,6 +46,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     validator: (String? value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter some text';
+                      } else if (value.isEmail()) {
+                        return 'Please enter a valid email';
                       }
                       return null;
                     },
