@@ -8,7 +8,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'App title',
-      initialRoute: '/splashscreen',
+      initialRoute: '/splash_screen',
       routes: routeMap,
     );
   }

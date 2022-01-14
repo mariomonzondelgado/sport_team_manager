@@ -72,12 +72,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Divider(color: Colors.transparent),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushReplacementNamed('/tabs_screen');
+                    },
                     child: Text('sign in'),
                   ),
                   Divider(color: Colors.transparent),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushReplacementNamed('/register_screen');
+                    },
                     child: Text('¿No tienes cuenta? Regístrate aquí.'),
                   ),
                 ],

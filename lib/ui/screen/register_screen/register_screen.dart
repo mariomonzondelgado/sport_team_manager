@@ -67,7 +67,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   Divider(color: Colors.transparent),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushReplacementNamed('/tabs_screen');
+                    },
                     child: Text('sign up'),
                   ),
                   Divider(color: Colors.transparent),
