@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:sport_team_manager/ui/screen/events_tab_screen/event_tab_screen.dart';
 import 'package:sport_team_manager/ui/screen/news_tab_screen/news_tab_screen.dart';
 
 class TabsScreen extends StatefulWidget {
@@ -15,10 +16,7 @@ class _TabsScreenState extends State<TabsScreen> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     NewsTabScreen(),
-    Text(
-      'Index 1: Events',
-      style: optionStyle,
-    ),
+    EventsTabScreen(),
     Text(
       'Index 2: Roster',
       style: optionStyle,
