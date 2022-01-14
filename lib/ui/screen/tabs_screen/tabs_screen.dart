@@ -14,19 +14,23 @@ class _TabsScreenState extends State<TabsScreen> {
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
   static const List<Widget> _widgetOptions = <Widget>[
     Text(
-      'Index 0: Home',
+      'Index 0: News',
       style: optionStyle,
     ),
     Text(
-      'Index 1: Business',
+      'Index 1: Events',
       style: optionStyle,
     ),
     Text(
-      'Index 2: School',
+      'Index 2: Roster',
       style: optionStyle,
     ),
     Text(
-      'Index 3: Settings',
+      'Index 3: Sponsors',
+      style: optionStyle,
+    ),
+    Text(
+      'Index 4: Contact',
       style: optionStyle,
     ),
   ];
@@ -54,11 +58,15 @@ class _TabsScreenState extends State<TabsScreen> {
             label: 'Events',
           ),
           BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.peopleCarry),
+            icon: FaIcon(FontAwesomeIcons.peopleArrows),
             label: 'Roster',
           ),
           BottomNavigationBarItem(
-            icon: FaIcon(FontAwesomeIcons.carAlt),
+            icon: FaIcon(FontAwesomeIcons.medal),
+            label: 'Sponsors',
+          ),
+          BottomNavigationBarItem(
+            icon: FaIcon(FontAwesomeIcons.phone),
             label: 'Contact',
           ),
         ],
