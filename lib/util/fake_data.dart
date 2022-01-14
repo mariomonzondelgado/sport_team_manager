@@ -8,3 +8,5 @@ const String fakeCardBody =
     'tincidunt. Etiam nec ex ut sem sodales tristique. Suspendisse cursus '
     'dolor ac rutrum imperdiet. Vivamus ullamcorper nunc a libero tempus '
     'efficitur. Aliquam at accumsan enim, luctus pulvinar justo.';
+const String fakeEventCardBody = 'Partido de liga que enfrentara a Telde Canes '
+    'contra el equipo de la isla vecina Tenerife Helldogs';
