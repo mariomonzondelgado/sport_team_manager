@@ -10,6 +10,9 @@ class App extends StatelessWidget {
       title: 'App title',
       initialRoute: '/splash_screen',
       routes: routeMap,
+      theme: ThemeData.light().copyWith(
+        scaffoldBackgroundColor: Colors.grey[200],
+      ),
     );
   }
 }
