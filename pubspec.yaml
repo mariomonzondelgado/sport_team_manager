@@ -20,7 +20,7 @@ dependencies:
   lottie: 1.2.1
   json_annotation: 4.4.0
   logger: 1.1.0
-  riverpod: 1.0.3
+  flutter_riverpod: 1.0.3
 
   #FIREBASE
   firebase_core: 1.11.0
