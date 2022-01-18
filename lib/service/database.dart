@@ -1,126 +1,147 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:logger/logger.dart';
 import 'package:sport_team_manager/model/event_model.dart';
 import 'package:sport_team_manager/model/player_model.dart';
 import 'package:sport_team_manager/model/post_model.dart';
 import 'package:sport_team_manager/model/sponsor_model.dart';
 
 class Database {
-  final events = FirebaseFirestore.instance.collection('events');
-  final news = FirebaseFirestore.instance.collection('news');
-  final sponsors = FirebaseFirestore.instance.collection('sponsors');
-  final roster = FirebaseFirestore.instance.collection('roster');
+  final _events = FirebaseFirestore.instance.collection('events');
+  final _news = FirebaseFirestore.instance.collection('news');
+  final _sponsors = FirebaseFirestore.instance.collection('sponsors');
+  final _roster = FirebaseFirestore.instance.collection('roster');
 
   //READ
-  Future<QuerySnapshot> getNews() async {
-    return await news.get();
-  }
-
-  Future<QuerySnapshot> getEvents() async {
-    return await events.get();
-  }
-
-  Future<QuerySnapshot> getRoster() async {
-    return await news.get();
-  }
-
-  Future<QuerySnapshot> getSponsor() async {
-    return await news.get();
-  }
+  Stream get allNews => _news.snapshots();
+  Stream get allEvents => _events.snapshots();
+  Stream get allRoster => _roster.snapshots();
+  Stream get allSponsors => _sponsors.snapshots();
 
   //CREATE
-  Future<void> addPost(Post post) {
-    return news
-        .add(post.toJson())
-        .then((value) => print('Noticia creada'))
-        .catchError((error) => print('Error al crear la noticia: $error'));
+  Future<bool> addPost(Post post) async {
+    try {
+      await _news.add(post.toJson());
+      return true;
+    } catch (e) {
+      return Future.error(e); // return error
+    }
   }
 
-  Future<void> addEvent(Event event) {
-    return events
-        .add(event.toJson())
-        .then((value) => print('Evento creado'))
-        .catchError((error) => print('Error al crear el evento: $error'));
+  Future<bool> addEvent(Event event) async {
+    try {
+      await _events.add(event.toJson());
+      return true;
+    } catch (e) {
+      return Future.error(e); // return error
+    }
   }
 
-  Future<void> addPlayer(Player player) {
-    return roster
-        .add(player.toJson())
-        .then((value) => print('Jugador creado'))
-        .catchError((error) => print('Error al crear el jugador: $error'));
+  Future<bool> addPlayer(Player player) async {
+    try {
+      await _roster.add(player.toJson());
+      return true;
+    } catch (e) {
+      return Future.error(e); // return error
+    }
   }
 
-  Future<void> addSponsor(Sponsor sponsor) {
-    return roster
-        .add(sponsor.toJson())
-        .then((value) => print('Patrocinador creado'))
-        .catchError(
-            (error) => print('Error al crear el patrocinadore: $error'));
+  Future<bool> addSponsor(Sponsor sponsor) async {
+    try {
+      await _sponsors.add(sponsor.toJson());
+      return true;
+    } catch (e) {
+      return Future.error(e); // return error
+    }
   }
 
   //DELETE
-  Future<void> deletePost(id) {
-    return news
-        .doc(id)
-        .delete()
-        .then((value) => print('Post eliminado'))
-        .catchError((e) => print('Error al borrar el post: $e'));
+
+  Future<bool> removePost(String postId) async {
+    try {
+      await _news
+          .doc(postId)
+          .delete(); // deletes the document with id of movieId from our movies collection
+      return true; // return true after successful deletion .
+    } catch (e) {
+      Logger().e(e);
+      return Future.error(e); // return error
+    }
   }
 
-  Future<void> deleteEvent(id) {
-    return events
-        .doc(id)
-        .delete()
-        .then((value) => print('Evento eliminado'))
-        .catchError((e) => print('Error al borrar el evento: $e'));
+  Future<bool> removeEvent(String eventId) async {
+    try {
+      await _events
+          .doc(eventId)
+          .delete(); // deletes the document with id of movieId from our movies collection
+      return true; // return true after successful deletion .
+    } catch (e) {
+      Logger().e(e);
+      return Future.error(e); // return error
+    }
   }
 
-  Future<void> deletePlayer(id) {
-    return roster
-        .doc(id)
-        .delete()
-        .then((value) => print('Jugador eliminado'))
-        .catchError((e) => print('Error al borrar el jugador: $e'));
+  Future<bool> removePlayer(String playerId) async {
+    try {
+      await _roster
+          .doc(playerId)
+          .delete(); // deletes the document with id of movieId from our movies collection
+      return true; // return true after successful deletion .
+    } catch (e) {
+      Logger().e(e);
+      return Future.error(e); // return error
+    }
   }
 
-  Future<void> deleteSponsor(id) {
-    return sponsors
-        .doc(id)
-        .delete()
-        .then((value) => print('Patrocinador eliminado'))
-        .catchError((e) => print('Error al borrar el patrocinador: $e'));
+  Future<bool> removeSponsor(String sponsorId) async {
+    try {
+      await _sponsors
+          .doc(sponsorId)
+          .delete(); // deletes the document with id of movieId from our movies collection
+      return true; // return true after successful deletion .
+    } catch (e) {
+      Logger().e(e);
+      return Future.error(e); // return error
+    }
   }
 
   //UPDATE
-  Future<void> updatePost(id, Post post) {
-    return news
-        .doc(id)
-        .update(post.toJson())
-        .then((value) => print('Noticia actualizada'))
-        .catchError((error) => print('Error al actualizar la noticia: $error'));
+  Future<bool> editPost(Post post, String postId) async {
+    try {
+      await _news.doc(postId).update(post.toJson());
+      return true;
+    } catch (e) {
+      Logger().e(e);
+      return Future.error(e);
+    }
   }
 
-  Future<void> updateEvent(id, Event event) {
-    return events
-        .doc(id)
-        .update(event.toJson())
-        .then((value) => print('Evento actualizado'))
-        .catchError((error) => print('Error al actualizar el evento: $error'));
+  Future<bool> editEvent(Event event, String eventId) async {
+    try {
+      await _events.doc(eventId).update(event.toJson());
+      return true;
+    } catch (e) {
+      Logger().e(e);
+      return Future.error(e);
+    }
   }
 
-  Future<void> updatePlayer(id, Player player) {
-    return roster
-        .doc(id)
-        .update(player.toJson())
-        .then((value) => print('Jugador actualizado'))
-        .catchError((error) => print('Error al actualizar el jugador: $error'));
+  Future<bool> editPlayer(Player player, String playerId) async {
+    try {
+      await _roster.doc(playerId).update(player.toJson());
+      return true;
+    } catch (e) {
+      Logger().e(e);
+      return Future.error(e);
+    }
   }
 
-  Future<void> updateSponsor(id, Sponsor sponsor) {
-    return sponsors
-        .doc(id)
-        .update(sponsor.toJson())
-        .then((value) => print('Patrocinador actualizado'))
-        .catchError(
-            (error) => print('Error al actualizar el patrocinador: $error'));
+  Future<bool> editSponsor(Sponsor sponsor, String sponsorId) async {
+    try {
+      await _sponsors.doc(sponsorId).update(sponsor.toJson());
+      return true;
+    } catch (e) {
+      Logger().e(e);
+      return Future.error(e);
+    }
   }
 }
