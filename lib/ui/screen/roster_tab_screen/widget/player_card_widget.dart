@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sport_team_manager/generated/assets.dart';
-import 'package:sport_team_manager/util/fake_data.dart';
 
 class PlayerCardWidget extends StatelessWidget {
-  const PlayerCardWidget({Key? key}) : super(key: key);
+  const PlayerCardWidget({
+    Key? key,
+    required this.playerName,
+    required this.playerPosition,
+    required this.playerNumber,
+  }) : super(key: key);
+
+  final String playerName;
+  final String playerPosition;
+  final String playerNumber;
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +40,14 @@ class PlayerCardWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    'Player Name',
+                    playerName,
                     style: GoogleFonts.roboto(
                       textStyle: TextStyle(
                           fontSize: 16.0, fontWeight: FontWeight.bold),
                     ),
                   ),
                   Text(
-                    'Player Position',
+                    playerPosition,
                     style: GoogleFonts.roboto(
                       textStyle: TextStyle(
                         fontSize: 12.0,
@@ -52,7 +60,7 @@ class PlayerCardWidget extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(8.0),
               child: Text(
-                '84',
+                playerNumber,
                 style: GoogleFonts.roboto(
                   textStyle:
                       TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold),
@@ -61,27 +69,6 @@ class PlayerCardWidget extends StatelessWidget {
             )
           ],
         ),
-      ),
-    );
-  }
-}
-
-class EventCardTitle extends StatelessWidget {
-  const EventCardTitle({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Text(
-        fakeCardTitle,
-        style: GoogleFonts.roboto(
-            textStyle: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 20.0,
-        )),
       ),
     );
   }
