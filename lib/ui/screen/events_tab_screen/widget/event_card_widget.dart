@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sport_team_manager/util/fake_data.dart';
 
 class EventCardWidget extends StatelessWidget {
-  const EventCardWidget({Key? key}) : super(key: key);
+  const EventCardWidget({
+    Key? key,
+    required this.title,
+    required this.body,
+  }) : super(key: key);
+
+  final String title;
+  final String body;
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +25,8 @@ class EventCardWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            EventCardTitle(),
-            EventCardBody(),
+            EventCardTitle(title: title),
+            EventCardBody(body: body),
           ],
         ),
       ),
@@ -31,14 +37,17 @@ class EventCardWidget extends StatelessWidget {
 class EventCardTitle extends StatelessWidget {
   const EventCardTitle({
     Key? key,
+    required this.title,
   }) : super(key: key);
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Text(
-        fakeCardTitle,
+        title,
         style: GoogleFonts.roboto(
             textStyle: TextStyle(
           fontWeight: FontWeight.bold,
@@ -52,14 +61,17 @@ class EventCardTitle extends StatelessWidget {
 class EventCardBody extends StatelessWidget {
   const EventCardBody({
     Key? key,
+    required this.body,
   }) : super(key: key);
+
+  final String body;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Text(
-        fakeEventCardBody,
+        body,
         textAlign: TextAlign.justify,
       ),
     );
