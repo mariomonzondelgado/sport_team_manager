@@ -3,6 +3,15 @@ import 'package:url_launcher/url_launcher.dart';
 import 'text_utils.dart';
 
 class UrlLauncherUtils {
+  static openUrl(String url) async {
+    ;
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   static openMap(double lat, double lon) async {
     final url = 'https://www.google.com/maps/search/?api=1&query=$lat,$lon';
     if (await canLaunch(url)) {

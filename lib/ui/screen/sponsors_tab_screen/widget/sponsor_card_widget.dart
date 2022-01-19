@@ -2,10 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sport_team_manager/generated/assets.dart';
-import 'package:sport_team_manager/util/fake_data.dart';
+import 'package:sport_team_manager/util/url_launcher_util.dart';
 
 class SponsorCardWidget extends StatelessWidget {
-  const SponsorCardWidget({Key? key}) : super(key: key);
+  const SponsorCardWidget({
+    Key? key,
+    required this.name,
+    required this.description,
+    this.facebook,
+    this.instagram,
+    this.twitter,
+    this.email,
+    this.whatsapp,
+    this.phone,
+  }) : super(key: key);
+
+  final String name;
+  final String description;
+  final String? facebook, instagram, twitter, email, whatsapp, phone;
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +36,9 @@ class SponsorCardWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SponsorLogo(),
-            SponsorNameWidget(),
+            SponsorNameWidget(name: name),
             SponsorSocialButtons(),
-            SponsorDescriptionWidget(),
+            SponsorDescriptionWidget(description: description),
           ],
         ),
       ),
@@ -33,36 +47,83 @@ class SponsorCardWidget extends StatelessWidget {
 }
 
 class SponsorSocialButtons extends StatelessWidget {
-  const SponsorSocialButtons({Key? key}) : super(key: key);
+  const SponsorSocialButtons(
+      {Key? key,
+      this.facebook,
+      this.instagram,
+      this.twitter,
+      this.email,
+      this.whatsapp,
+      this.phone})
+      : super(key: key);
+
+  final String? facebook, instagram, twitter, email, whatsapp, phone;
 
   @override
   Widget build(BuildContext context) {
+    final hasFacebook = facebook!.isNotEmpty && facebook != null;
+    final hasInstagram = instagram!.isNotEmpty && instagram != null;
+    final hasTwitter = twitter!.isNotEmpty && twitter != null;
+    final hasMail = email!.isNotEmpty && email != null;
+    final hasPhone = phone!.isNotEmpty && phone != null;
+    final hasWhatsapp = whatsapp!.isNotEmpty && whatsapp != null;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        IconButton(
-          onPressed: () {},
-          icon: FaIcon(FontAwesomeIcons.facebook),
+        Visibility(
+          visible: hasFacebook,
+          child: IconButton(
+            onPressed: () {
+              UrlLauncherUtils.openUrl(facebook!);
+            },
+            icon: FaIcon(FontAwesomeIcons.facebook),
+          ),
         ),
-        IconButton(
-          onPressed: () {},
-          icon: FaIcon(FontAwesomeIcons.twitter),
+        Visibility(
+          visible: hasTwitter,
+          child: IconButton(
+            onPressed: () {
+              UrlLauncherUtils.openUrl(twitter!);
+            },
+            icon: FaIcon(FontAwesomeIcons.twitter),
+          ),
         ),
-        IconButton(
-          onPressed: () {},
-          icon: FaIcon(FontAwesomeIcons.instagram),
+        Visibility(
+          visible: hasInstagram,
+          child: IconButton(
+            onPressed: () {
+              UrlLauncherUtils.openUrl(instagram!);
+            },
+            icon: FaIcon(FontAwesomeIcons.instagram),
+          ),
         ),
-        IconButton(
-          onPressed: () {},
-          icon: FaIcon(FontAwesomeIcons.whatsapp),
+        Visibility(
+          visible: hasWhatsapp,
+          child: IconButton(
+            onPressed: () {
+              UrlLauncherUtils.openUrl(whatsapp!);
+            },
+            icon: FaIcon(FontAwesomeIcons.whatsapp),
+          ),
         ),
-        IconButton(
-          onPressed: () {},
-          icon: FaIcon(FontAwesomeIcons.mailBulk),
+        Visibility(
+          visible: hasMail,
+          child: IconButton(
+            onPressed: () {
+              UrlLauncherUtils.mailTo(email!);
+            },
+            icon: FaIcon(FontAwesomeIcons.mailBulk),
+          ),
         ),
-        IconButton(
-          onPressed: () {},
-          icon: FaIcon(FontAwesomeIcons.phone),
+        Visibility(
+          visible: hasPhone,
+          child: IconButton(
+            onPressed: () {
+              UrlLauncherUtils.call(phone!);
+            },
+            icon: FaIcon(FontAwesomeIcons.phone),
+          ),
         ),
       ],
     );
@@ -92,16 +153,16 @@ class SponsorLogo extends StatelessWidget {
 }
 
 class SponsorNameWidget extends StatelessWidget {
-  const SponsorNameWidget({
-    Key? key,
-  }) : super(key: key);
+  const SponsorNameWidget({Key? key, required this.name}) : super(key: key);
+
+  final String name;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Text(
-        fakeSponsorName,
+        name,
         style: GoogleFonts.roboto(
             textStyle: TextStyle(
           fontWeight: FontWeight.bold,
@@ -113,16 +174,17 @@ class SponsorNameWidget extends StatelessWidget {
 }
 
 class SponsorDescriptionWidget extends StatelessWidget {
-  const SponsorDescriptionWidget({
-    Key? key,
-  }) : super(key: key);
+  const SponsorDescriptionWidget({Key? key, required this.description})
+      : super(key: key);
+
+  final String description;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Text(
-        fakeSponsorDescription,
+        description,
         textAlign: TextAlign.justify,
       ),
     );
