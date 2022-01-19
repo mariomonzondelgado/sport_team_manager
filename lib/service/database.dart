@@ -12,10 +12,11 @@ class Database {
   final _roster = FirebaseFirestore.instance.collection('roster');
 
   //READ
-  Stream get allNews => _news.snapshots();
-  Stream get allEvents => _events.snapshots();
-  Stream get allRoster => _roster.snapshots();
-  Stream get allSponsors => _sponsors.snapshots();
+
+  Stream<QuerySnapshot> get allNews => _news.snapshots();
+  Stream<QuerySnapshot> get allEvents => _events.snapshots();
+  Stream<QuerySnapshot> get allRoster => _roster.snapshots();
+  Stream<QuerySnapshot> get allSponsors => _sponsors.snapshots();
 
   //CREATE
   Future<bool> addPost(Post post) async {
