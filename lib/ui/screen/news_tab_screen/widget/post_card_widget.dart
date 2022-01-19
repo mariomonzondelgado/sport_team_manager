@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sport_team_manager/generated/assets.dart';
-import 'package:sport_team_manager/util/fake_data.dart';
 
 class PostCardWidget extends StatelessWidget {
-  const PostCardWidget({Key? key}) : super(key: key);
+  const PostCardWidget({
+    Key? key,
+    required this.title,
+    required this.body,
+  }) : super(key: key);
+
+  final String title;
+  final String body;
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +27,12 @@ class PostCardWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             PostCardImage(),
-            PostCardTitle(),
-            PostCardBody(),
+            PostCardTitle(
+              title: title,
+            ),
+            PostCardBody(
+              body: body,
+            ),
           ],
         ),
       ),
@@ -53,16 +63,16 @@ class PostCardImage extends StatelessWidget {
 }
 
 class PostCardTitle extends StatelessWidget {
-  const PostCardTitle({
-    Key? key,
-  }) : super(key: key);
+  const PostCardTitle({Key? key, required this.title}) : super(key: key);
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Text(
-        fakeCardTitle,
+        title,
         style: GoogleFonts.roboto(
             textStyle: TextStyle(
           fontWeight: FontWeight.bold,
@@ -76,14 +86,17 @@ class PostCardTitle extends StatelessWidget {
 class PostCardBody extends StatelessWidget {
   const PostCardBody({
     Key? key,
+    required this.body,
   }) : super(key: key);
+
+  final String body;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Text(
-        fakeCardBody,
+        body,
         textAlign: TextAlign.justify,
       ),
     );
