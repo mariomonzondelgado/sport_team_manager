@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sport_team_manager/generated/assets.dart';
 
 class PostCardWidget extends StatelessWidget {
   const PostCardWidget({
     Key? key,
     required this.title,
     required this.body,
+    required this.image,
   }) : super(key: key);
 
   final String title;
   final String body;
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,9 @@ class PostCardWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            PostCardImage(),
+            PostCardImage(
+              image: image,
+            ),
             PostCardTitle(
               title: title,
             ),
@@ -43,7 +46,10 @@ class PostCardWidget extends StatelessWidget {
 class PostCardImage extends StatelessWidget {
   const PostCardImage({
     Key? key,
+    required this.image,
   }) : super(key: key);
+
+  final String image;
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +58,8 @@ class PostCardImage extends StatelessWidget {
         topLeft: Radius.circular(8.0),
         topRight: Radius.circular(8.0),
       ),
-      child: Image.asset(
-        Assets.imagesPlaceholder,
+      child: Image.network(
+        image,
         fit: BoxFit.cover,
         width: 600,
         height: 240,

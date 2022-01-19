@@ -1,3 +1,4 @@
+import 'package:sport_team_manager/ui/screen/edit_post_screen/edit_post_screen.dart';
 import 'package:sport_team_manager/ui/screen/home_screen/home_screen.dart';
 import 'package:sport_team_manager/ui/screen/login_screen/login_screen.dart';
 import 'package:sport_team_manager/ui/screen/register_screen/register_screen.dart';
@@ -10,4 +11,5 @@ final routeMap = {
   '/login_screen': (_) => LoginScreen(),
   '/register_screen': (_) => RegisterScreen(),
   '/tabs_screen': (_) => TabsScreen(),
+  EditPostScreen.routeName: (_) => EditPostScreen(),
 };
