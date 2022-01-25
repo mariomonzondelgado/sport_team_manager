@@ -23,11 +23,13 @@ dependencies:
   flutter_riverpod: 1.0.3
   shared_preferences: 2.0.12
   url_launcher: 6.0.18
+  image_picker: 0.8.4+4
 
   #FIREBASE
   firebase_core: 1.11.0
   firebase_auth: 3.3.5
   cloud_firestore: 3.1.6
+  firebase_storage: 10.2.5
 
 
 dev_dependencies:

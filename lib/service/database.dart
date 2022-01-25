@@ -57,48 +57,48 @@ class Database {
 
   //DELETE
 
+  /// deletes the document with id of [postId] from our news collection
+  /// return true after successful deletion
   Future<bool> removePost(String postId) async {
     try {
-      await _news
-          .doc(postId)
-          .delete(); // deletes the document with id of movieId from our movies collection
-      return true; // return true after successful deletion .
+      await _news.doc(postId).delete();
+      return true;
     } catch (e) {
       Logger().e(e);
-      return Future.error(e); // return error
+      return Future.error(e);
     }
   }
 
+  /// deletes the document with id of [eventId] from our news collection
+  /// return true after successful deletion
   Future<bool> removeEvent(String eventId) async {
     try {
-      await _events
-          .doc(eventId)
-          .delete(); // deletes the document with id of movieId from our movies collection
-      return true; // return true after successful deletion .
+      await _events.doc(eventId).delete();
+      return true;
     } catch (e) {
       Logger().e(e);
       return Future.error(e); // return error
     }
   }
 
+  /// deletes the document with id of [playerId] from our news collection
+  /// return true after successful deletion
   Future<bool> removePlayer(String playerId) async {
     try {
-      await _roster
-          .doc(playerId)
-          .delete(); // deletes the document with id of movieId from our movies collection
-      return true; // return true after successful deletion .
+      await _roster.doc(playerId).delete();
+      return true;
     } catch (e) {
       Logger().e(e);
       return Future.error(e); // return error
     }
   }
 
+  /// deletes the document with id of [sponsorId] from our news collection
+  /// return true after successful deletion
   Future<bool> removeSponsor(String sponsorId) async {
     try {
-      await _sponsors
-          .doc(sponsorId)
-          .delete(); // deletes the document with id of movieId from our movies collection
-      return true; // return true after successful deletion .
+      await _sponsors.doc(sponsorId).delete();
+      return true;
     } catch (e) {
       Logger().e(e);
       return Future.error(e); // return error
