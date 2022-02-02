@@ -52,7 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       return null;
                     },
                   ),
-                  Divider(color: Colors.transparent),
+                  SizedBox(height: 16.0),
                   TextFormField(
                     controller: _passwordController,
                     keyboardType: TextInputType.visiblePassword,

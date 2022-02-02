@@ -61,18 +61,18 @@ class SponsorSocialButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final hasFacebook = facebook!.isNotEmpty && facebook != null;
-    final hasInstagram = instagram!.isNotEmpty && instagram != null;
-    final hasTwitter = twitter!.isNotEmpty && twitter != null;
-    final hasMail = email!.isNotEmpty && email != null;
-    final hasPhone = phone!.isNotEmpty && phone != null;
-    final hasWhatsapp = whatsapp!.isNotEmpty && whatsapp != null;
+    final hasFacebook = facebook != null;
+    final hasInstagram = instagram != null;
+    final hasTwitter = twitter != null;
+    final hasMail = email != null;
+    final hasPhone = phone != null;
+    final hasWhatsapp = whatsapp != null;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Visibility(
-          visible: hasFacebook,
+          visible: !hasFacebook,
           child: IconButton(
             onPressed: () {
               UrlLauncherUtils.openUrl(facebook!);
@@ -81,7 +81,7 @@ class SponsorSocialButtons extends StatelessWidget {
           ),
         ),
         Visibility(
-          visible: hasTwitter,
+          visible: !hasTwitter,
           child: IconButton(
             onPressed: () {
               UrlLauncherUtils.openUrl(twitter!);
@@ -90,7 +90,7 @@ class SponsorSocialButtons extends StatelessWidget {
           ),
         ),
         Visibility(
-          visible: hasInstagram,
+          visible: !hasInstagram,
           child: IconButton(
             onPressed: () {
               UrlLauncherUtils.openUrl(instagram!);
@@ -99,7 +99,7 @@ class SponsorSocialButtons extends StatelessWidget {
           ),
         ),
         Visibility(
-          visible: hasWhatsapp,
+          visible: !hasWhatsapp,
           child: IconButton(
             onPressed: () {
               UrlLauncherUtils.openUrl(whatsapp!);
@@ -108,7 +108,7 @@ class SponsorSocialButtons extends StatelessWidget {
           ),
         ),
         Visibility(
-          visible: hasMail,
+          visible: !hasMail,
           child: IconButton(
             onPressed: () {
               UrlLauncherUtils.mailTo(email!);
@@ -117,7 +117,7 @@ class SponsorSocialButtons extends StatelessWidget {
           ),
         ),
         Visibility(
-          visible: hasPhone,
+          visible: !hasPhone,
           child: IconButton(
             onPressed: () {
               UrlLauncherUtils.call(phone!);
