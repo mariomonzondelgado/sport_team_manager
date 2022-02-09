@@ -1,78 +1,41 @@
 {
   "project_info": {
-    "project_number": "499533997947",
-    "project_id": "dam-project2021",
-    "storage_bucket": "dam-project2021.appspot.com"
+    "project_number": "778797417386",
+    "project_id": "telde-canes",
+    "storage_bucket": "telde-canes.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:499533997947:android:c291973ec1d7f8a719ffde",
-        "android_client_info": {
-          "package_name": "com.mariomonzon.dam_project"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "499533997947-sg3lke3nfca34j5a90u1jvns1fpa1iqs.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.mariomonzon.dam_project",
-            "certificate_hash": "248e38c665885d8e636d78e19f919ebe0a39e458"
-          }
-        },
-        {
-          "client_id": "499533997947-hauf1gcqll5bq9t951aqk171gepgesga.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyDC5jJa265caEsW4x_CVLCP60z4YLhgE3A"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "499533997947-hauf1gcqll5bq9t951aqk171gepgesga.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:499533997947:android:46a9fc302e458d8219ffde",
+        "mobilesdk_app_id": "1:778797417386:android:beb2a6899f5458fb9821d3",
         "android_client_info": {
           "package_name": "com.mariomonzon.sport_team_manager"
         }
       },
       "oauth_client": [
         {
-          "client_id": "499533997947-79114f2cdskti54sekgeuf8u576m0gh2.apps.googleusercontent.com",
+          "client_id": "778797417386-2t53tgmrkiln4i2jb6e93blhe7c45tko.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.mariomonzon.sport_team_manager",
-            "certificate_hash": "cf94c0e36d841d7cc55b5bb52c2f1a138f922d0c"
+            "certificate_hash": "3b19fab8cc28a721d5bd203b447c4abcc3a3be7e"
           }
         },
         {
-          "client_id": "499533997947-hauf1gcqll5bq9t951aqk171gepgesga.apps.googleusercontent.com",
+          "client_id": "778797417386-80njet4i96ilmpckhslt765n70aljspa.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDC5jJa265caEsW4x_CVLCP60z4YLhgE3A"
+          "current_key": "AIzaSyAWcWF9LwZClLJum-LC3r5mJxZVCGKtOVU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "499533997947-hauf1gcqll5bq9t951aqk171gepgesga.apps.googleusercontent.com",
+              "client_id": "778797417386-80njet4i96ilmpckhslt765n70aljspa.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
