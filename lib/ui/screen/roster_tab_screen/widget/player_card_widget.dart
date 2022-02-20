@@ -8,11 +8,13 @@ class PlayerCardWidget extends StatelessWidget {
     required this.playerName,
     required this.playerPosition,
     required this.playerNumber,
+    this.playerPhoto,
   }) : super(key: key);
 
   final String playerName;
   final String playerPosition;
   final String playerNumber;
+  final String? playerPhoto;
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +31,17 @@ class PlayerCardWidget extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Image.asset(
-                Assets.imagesPlaceholder,
-                width: 64,
-                height: 64,
-              ),
+              child: playerPhoto != null
+                  ? Image.network(
+                      playerPhoto!,
+                      width: 64.0,
+                      height: 64.0,
+                    )
+                  : Image.network(
+                      Assets.imagesPlaceholder,
+                      width: 64,
+                      height: 64,
+                    ),
             ),
             Expanded(
               child: Column(

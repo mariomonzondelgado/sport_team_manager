@@ -8,6 +8,8 @@ class Post {
     required this.title,
     required this.body,
     required this.imageUrl,
+    required this.postId,
+    required this.date,
   });
 
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
@@ -22,4 +24,13 @@ class Post {
 
   @JsonKey(name: 'image')
   String imageUrl;
+
+  @JsonKey(name: 'postId')
+  String postId;
+
+  @JsonKey(name: 'date')
+  String date;
+
+
+
 }

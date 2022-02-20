@@ -11,6 +11,11 @@ extension StringExtension on String {
         .hasMatch(this);
   }
 
+  /// Check if a string is a valid password
+  bool isPassword() {
+    return trim().isNotEmpty && length >= 8;
+  }
+
   /// Check if a string is a valid phone
   bool isPhone() {
     return RegExp(r'^[0-9]*$').hasMatch(this);

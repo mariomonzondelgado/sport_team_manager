@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sport_team_manager/service/auth_service.dart';
+import 'package:sport_team_manager/service/controller_toast_menssages.dart';
+import 'package:sport_team_manager/ui/screen/register_screen/register_screen.dart';
+import 'package:sport_team_manager/ui/screen/tabs_screen/tabs_screen.dart';
 import 'package:sport_team_manager/util/text_utils.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -12,11 +16,26 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
+  final AuthService _authService = AuthService();
   final _passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
+            child: StreamBuilder(
+      stream: _authService.authStatus,
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        if (!snapshot.hasData || snapshot.hasError) {
+          return loginPage();
+        } else {
+          return TabsScreen(memberId: snapshot.data.uid);
+        }
+      },
+    )));
+  }
+
+  Widget loginPage() {
+    return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -75,17 +94,24 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Divider(color: Colors.transparent),
                   ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed('/tabs_screen');
+                    onPressed: () async {
+                      try {
+                        // await Person.signIn(_emailController.text,_passwordController.text);
+                        await _authService.signin(
+                            _emailController.text, _passwordController.text);
+                      } catch (e) {
+                        ControllerToastMessages.messageFromError(e.toString());
+                      }
                     },
                     child: Text('sign in'),
                   ),
                   Divider(color: Colors.transparent),
                   TextButton(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed('/register_screen');
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RegisterScreen()));
                     },
                     child: Text('¿No tienes cuenta? Regístrate aquí.'),
                   ),
@@ -95,6 +121,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ],
       ),
-    ));
+    );
   }
 }
