@@ -18,7 +18,7 @@ class _EditPostScreenState extends State<EditPostScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              PostCardImage(),
+              //PostCardImage(),
               SizedBox(height: 16.0),
               TextFormField(
                 controller: _titleController,

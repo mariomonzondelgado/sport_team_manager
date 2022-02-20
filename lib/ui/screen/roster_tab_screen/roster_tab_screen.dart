@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sport_team_manager/provider/database_provider.dart';
 import 'package:sport_team_manager/ui/screen/roster_tab_screen/widget/player_card_widget.dart';
+import 'package:sport_team_manager/util/string_value_util.dart';
 
 class RosterTabScreen extends ConsumerWidget {
   const RosterTabScreen({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class RosterTabScreen extends ConsumerWidget {
       stream: database.allRoster,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
-          return Text('Algo ha fallado');
+          return Text(something_has_gone_wrong);
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return CircularProgressIndicator();
@@ -25,7 +26,8 @@ class RosterTabScreen extends ConsumerWidget {
             Map<String, dynamic> data =
                 document.data()! as Map<String, dynamic>;
             return PlayerCardWidget(
-              playerName: data['name'],
+              playerPhoto: data['photo'],
+              playerName: '${data['first_name']} ${data['last_name']}',
               playerPosition: data['position'],
               playerNumber: data['number'],
             );

@@ -1,12 +1,15 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:logger/logger.dart';
 
+
 class AuthService {
   final _auth = FirebaseAuth.instance;
+  Stream<User?> get authStatus=>_auth.authStateChanges();
+
 
   Future<void> signup(String email, String password) async {
     try {
-      await _auth.createUserWithEmailAndPassword(
+       await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -23,7 +26,7 @@ class AuthService {
 
   Future<void> signin(String email, String password) async {
     try {
-      await FirebaseAuth.instance
+        await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -36,7 +39,7 @@ class AuthService {
     }
   }
 
-  Future<User?> currentUser() async {
+  User? currentUser(){
     final user = _auth.currentUser;
     if (user != null) {
       return user;

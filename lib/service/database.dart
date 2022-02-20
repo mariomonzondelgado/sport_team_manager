@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:logger/logger.dart';
 import 'package:sport_team_manager/model/event_model.dart';
+import 'package:sport_team_manager/model/person_model.dart';
 import 'package:sport_team_manager/model/player_model.dart';
 import 'package:sport_team_manager/model/post_model.dart';
 import 'package:sport_team_manager/model/sponsor_model.dart';
@@ -10,6 +11,7 @@ class Database {
   final _news = FirebaseFirestore.instance.collection('news');
   final _sponsors = FirebaseFirestore.instance.collection('sponsors');
   final _roster = FirebaseFirestore.instance.collection('roster');
+  final _members = FirebaseFirestore.instance.collection('members');
 
   //READ
 
@@ -18,10 +20,44 @@ class Database {
   Stream<QuerySnapshot> get allRoster => _roster.snapshots();
   Stream<QuerySnapshot> get allSponsors => _sponsors.snapshots();
 
+  Future<bool> checkIfUserExistsInDB(String email,String userId)async{
+    bool exists=false;
+    QuerySnapshot snapshot= await _members.get();
+    for (var document in snapshot.docs) {
+      if(document["email"]==email){
+        exists=true;
+      }
+    }
+    return exists;
+  }
+
+  Future<bool> getMemberAdminStatus(String memberId) async{
+    bool isAdmin;
+    DocumentSnapshot<dynamic> snapshot=await _members.doc(memberId).get();
+    isAdmin=snapshot.data()!["isAdmin"];
+    return isAdmin;
+  }
+
+
+
   //CREATE
+
+  Future<bool> addMember(Person person, String uid) async {
+    try {
+      await _members.doc(uid).set(person.toJson());
+      return true;
+    } catch (e) {
+      return Future.error(e); // return error
+    }
+  }
+
+
   Future<bool> addPost(Post post) async {
     try {
-      await _news.add(post.toJson());
+      DocumentReference reference= _news.doc();
+      post.postId=reference.id;
+      await reference.set(post.toJson());
+      //await _news.add(post.toJson());
       return true;
     } catch (e) {
       return Future.error(e); // return error
@@ -145,4 +181,8 @@ class Database {
       return Future.error(e);
     }
   }
+
+
+
+
 }
