@@ -46,11 +46,11 @@ class Person {
 
   static signUp(
       String firstName, String lastName, String email, String password) async {
-    if (firstName.trim().isNotEmpty) {
+    if (firstName.trim().isEmpty) {
       throw Exception(add_valid_first_name);
     }
 
-    if (lastName.trim().isNotEmpty) {
+    if (lastName.trim().isEmpty) {
       throw Exception(add_valid_last_name);
     }
     if (!email.isEmail()) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:sport_team_manager/generated/assets.dart';
+import 'package:sport_team_manager/ui/widget/background_gradient_widget.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -20,8 +21,13 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Lottie.asset(Assets.lottieKickOff),
+      body: Stack(
+        children: [
+          const BackgroundGradientWidget(),
+          Center(
+            child: Lottie.asset(Assets.lottieKickOff),
+          ),
+        ],
       ),
     );
   }
