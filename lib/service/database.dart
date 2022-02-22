@@ -21,23 +21,21 @@ class Database {
   Stream<QuerySnapshot> get allSponsors => _sponsors.snapshots();
   Stream<QuerySnapshot> get allMembers => _members.snapshots();
 
-  Future<bool> checkIfUserExistsInDB(String email)async{
+  Future<bool> checkIfUserExistsInDB(String email) async {
     bool exists = false;
     QuerySnapshot snapshot = await _members.get();
     for (var document in snapshot.docs) {
-      if( document["email"] == email ){
+      if (document["email"] == email) {
         exists = true;
       }
     }
     return exists;
   }
 
-  Future<bool> getMemberAdminStatus(String memberId) async{
+  Future<bool> getMemberAdminStatus(String memberId) async {
     final snapshot = await _members.doc(memberId).get();
     return snapshot.data()!["isAdmin"];
   }
-
-
 
   //CREATE
 
@@ -50,11 +48,10 @@ class Database {
     }
   }
 
-
   Future<bool> addPost(Post post) async {
     try {
-      DocumentReference reference= _news.doc();
-      post.postId=reference.id;
+      DocumentReference reference = _news.doc();
+      post.postId = reference.id;
       await reference.set(post.toJson());
       //await _news.add(post.toJson());
       return true;
@@ -180,8 +177,4 @@ class Database {
       return Future.error(e);
     }
   }
-
-
-
-
 }

@@ -29,7 +29,7 @@ class Person {
       throw Exception(add_valid_password);
     } else {
       final Database db = Database();
-      bool exists = await db.checkIfUserExistsInDB(email, "");
+      bool exists = await db.checkIfUserExistsInDB(email);
       if (exists) {
         final AuthService authService = AuthService();
         authService.signin(email, password);
@@ -61,7 +61,7 @@ class Person {
     } else {
       final AuthService authService = AuthService();
       final Database db = Database();
-      bool exists = await db.checkIfUserExistsInDB(email, "");
+      bool exists = await db.checkIfUserExistsInDB(email);
       if (exists) {
         throw Exception("El correo ya está registrado");
       } else {
