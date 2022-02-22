@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:sport_team_manager/service/auth_service.dart';
 import 'package:sport_team_manager/ui/screen/register_screen/register_screen.dart';
 import 'package:sport_team_manager/ui/screen/tabs_screen/tabs_screen.dart';
+import 'package:sport_team_manager/ui/widget/background_gradient_widget.dart';
 import 'package:sport_team_manager/util/snackbar_util.dart';
 import 'package:sport_team_manager/util/string_value_util.dart';
 import 'package:sport_team_manager/util/text_utils.dart';
@@ -29,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          _loginBackgroundGradient(),
+          const BackgroundGradientWidget(),
           Center(
             child: StreamBuilder(
               stream: _authService.authStatus,
@@ -44,26 +45,11 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Container _loginBackgroundGradient() {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Colors.amber[700]!,
-            Colors.amber[500]!,
-            Colors.amber[300]!,
-            Colors.amber[100]!,
-          ],
-        ),
-      ),
-    );
-  }
-
   Widget loginPage() {
     return SingleChildScrollView(
       child: Container(
         padding: const EdgeInsets.all(16.0),
-        height: MediaQuery.of(context).size.height * 0.5,
+        // height: MediaQuery.of(context).size.height * 0.5,
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
@@ -72,6 +58,10 @@ class _LoginScreenState extends State<LoginScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Container(
+              width: 64.0,
+              child: Image.asset('assets/images/teldecanes.png'),
+            ),
             Text(
               'Login',
               style: GoogleFonts.roboto(
