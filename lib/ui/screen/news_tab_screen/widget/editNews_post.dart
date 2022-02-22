@@ -7,7 +7,7 @@ import 'package:sport_team_manager/model/admin_model.dart';
 import 'package:sport_team_manager/model/post_model.dart';
 import 'package:sport_team_manager/model/store_image.dart';
 import 'package:sport_team_manager/service/controller_toast_menssages.dart';
-import 'package:sport_team_manager/ui/other_widgets/loading_widget.dart';
+import 'package:sport_team_manager/ui/widget/loading_widget.dart';
 
 class EditNewsPost extends StatefulWidget {
   final Admin admin;
