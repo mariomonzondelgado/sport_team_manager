@@ -66,7 +66,7 @@ class Person {
         throw Exception("El correo ya está registrado");
       } else {
         await authService.signup(email, password);
-        User? user = await authService.currentUser();
+        User? user = authService.currentUser();
         Person person =
             Person(firstName: firstName, lastName: lastName, email: email);
         await db.addMember(person, user!.uid);
