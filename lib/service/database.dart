@@ -19,23 +19,22 @@ class Database {
   Stream<QuerySnapshot> get allEvents => _events.snapshots();
   Stream<QuerySnapshot> get allRoster => _roster.snapshots();
   Stream<QuerySnapshot> get allSponsors => _sponsors.snapshots();
+  Stream<QuerySnapshot> get allMembers => _members.snapshots();
 
-  Future<bool> checkIfUserExistsInDB(String email,String userId)async{
-    bool exists=false;
-    QuerySnapshot snapshot= await _members.get();
+  Future<bool> checkIfUserExistsInDB(String email)async{
+    bool exists = false;
+    QuerySnapshot snapshot = await _members.get();
     for (var document in snapshot.docs) {
-      if(document["email"]==email){
-        exists=true;
+      if( document["email"] == email ){
+        exists = true;
       }
     }
     return exists;
   }
 
   Future<bool> getMemberAdminStatus(String memberId) async{
-    bool isAdmin;
-    DocumentSnapshot<dynamic> snapshot=await _members.doc(memberId).get();
-    isAdmin=snapshot.data()!["isAdmin"];
-    return isAdmin;
+    final snapshot = await _members.doc(memberId).get();
+    return snapshot.data()!["isAdmin"];
   }
 
 
