@@ -4,7 +4,6 @@ import 'text_utils.dart';
 
 class UrlLauncherUtils {
   static openUrl(String url) async {
-    ;
     if (await canLaunch(url)) {
       await launch(url);
     } else {
