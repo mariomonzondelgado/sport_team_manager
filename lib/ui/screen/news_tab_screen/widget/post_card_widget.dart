@@ -24,109 +24,86 @@ class PostCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool? _isAdmin = person.isAdmin;
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8.0),
-        ),
-        color: Colors.white,
-        elevation: 8.0,
-        shadowColor: Colors.black54,
-        child: Stack(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                PostCardImage(imageUrl: image),
-                PostCardTitle(
-                  title: title,
-                ),
-                PostCardBody(
-                  body: body,
-                ),
-              ],
-            ),
-
-            (person.isAdmin==true)?
-            Container(
-              width: 600,
-              height: 240,
-              child: Column(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          color: Colors.white,
+          elevation: 8.0,
+          shadowColor: Colors.black54,
+          child: Stack(
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    flex: 1,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: Container(),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: InkWell(
-                            onTap: (){
-                              editNewsPost(context);
-                            },
-                            child: Center(
-                              child: Icon(
-                                Icons.edit_rounded,
-                                size: 40,
-                                color: Colors.greenAccent,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: InkWell(
-                            onTap: ()async{
-                              await (person as Admin).deletePost(postId,image);
-                            },
-                            child: Center(
-                              child: Icon(
-                                Icons.cancel,
-                                size: 40,
-                                color: Colors.redAccent,
-                              ),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Container(),
-                  )
+                  PostCardImage(imageUrl: image),
+                  PostCardTitle(title: title),
+                  PostCardBody(body: body),
+                  _editRemoveButtons(_isAdmin, context),
                 ],
               ),
-            )
-                :
-            Container(color: Colors.redAccent,)
+            ],
+          )),
+    );
+  }
 
+  Widget _editRemoveButtons(bool? _isAdmin, BuildContext context) {
+    return Visibility(
+      visible: _isAdmin ?? false,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              onPressed: () => editNewsPost(context),
+              icon: const Icon(
+                Icons.edit_rounded,
+                size: 40.0,
+                color: Colors.green,
+              ),
+            ),
+            IconButton(
+              onPressed: () async =>
+                  await (person as Admin).deletePost(postId, image),
+              icon: const Icon(
+                Icons.cancel,
+                size: 40.0,
+                color: Colors.red,
+              ),
+            ),
           ],
-        )
+        ),
       ),
     );
   }
 
-  void editNewsPost(BuildContext context) async{
+  void editNewsPost(BuildContext context) async {
     await showDialog(
       barrierDismissible: false,
       context: context,
-      builder: (BuildContext context){
+      builder: (BuildContext context) {
         return AlertDialog(
-          insetPadding: EdgeInsets.all(10),
-          contentPadding: EdgeInsets.all(0),
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(Radius.circular(10.0))
-          ),
+          insetPadding: const EdgeInsets.all(10.0),
+          contentPadding: const EdgeInsets.all(0),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+            Radius.circular(10.0),
+          )),
           content: Builder(
             builder: (context) {
               return EditNewsPost(
                 admin: person as Admin,
-                post: Post(title: title, body: body, imageUrl: image, postId: postId,date: "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"),
+                post: Post(
+                    title: title,
+                    body: body,
+                    imageUrl: image,
+                    postId: postId,
+                    date:
+                        "${DateTime.now().day}/${DateTime.now().month}/${DateTime.now().year}"),
               );
             },
           ),
@@ -134,9 +111,6 @@ class PostCardWidget extends StatelessWidget {
       },
     );
   }
-
-
-
 }
 
 class PostCardTitle extends StatelessWidget {
@@ -151,7 +125,7 @@ class PostCardTitle extends StatelessWidget {
       child: Text(
         title,
         style: GoogleFonts.roboto(
-            textStyle: TextStyle(
+            textStyle: const TextStyle(
           fontWeight: FontWeight.bold,
           fontSize: 20.0,
         )),
@@ -171,7 +145,7 @@ class PostCardBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(16.0),
       child: Text(
         body,
         textAlign: TextAlign.justify,

@@ -43,241 +43,182 @@ class _EditNewsPostState extends State<EditNewsPost> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 550,
-        width: 400,
+        height: MediaQuery.of(context).size.height * 0.8,
+        width: MediaQuery.of(context).size.width * 0.9,
         color: Colors.white,
         child: Stack(
           children: [
-            Column(
-              children: [
-                Expanded(
-                    flex: 1,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 6,
-                          child: Container(
-                              padding: EdgeInsets.only(
-                                left: 10,
-                                right: 10,
-                              ),
-                              child: Align(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "Editar Noticia",
-                                  style: GoogleFonts.roboto(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              )),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                              child: Align(
-                                  alignment: Alignment.center,
-                                  child: InkWell(
-                                    onTap: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Icon(
-                                      Icons.cancel,
-                                      size: 35,
-                                      color: Colors.redAccent,
-                                    ),
-                                  ))),
-                        )
-                      ],
-                    )),
-                Expanded(
-                    flex: 3,
-                    child: Container(
-                      padding: EdgeInsets.only(
-                          left: 10, right: 10, bottom: 5, top: 5),
-                      child: Row(
-                        children: [
-                          Expanded(
-                              flex: 2,
-                              child: image.file == null
-                                  ? storeImage.pathUrl == null
-                                      ? Container(
-                                          decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.black, width: 2),
-                                          ),
-                                        )
-                                      : Container(
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.black,
-                                                  width: 2),
-                                              image: DecorationImage(
-                                                  image:
-                                                      CachedNetworkImageProvider(
-                                                          (storeImage.pathUrl
-                                                              as String)),
-                                                  fit: BoxFit.fill)),
-                                        )
-                                  : Container(
-                                      decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: Colors.black, width: 2),
-                                          image: DecorationImage(
-                                              image: FileImage(
-                                                  (image.file as File)),
-                                              fit: BoxFit.fill)),
-                                    )),
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                                child: Align(
-                              alignment: Alignment.center,
-                              child: InkWell(
-                                onTap: () {
-                                  StoreImage.chooseImageFileFromCamera()
-                                      .then((selectedImage) {
-                                    if (selectedImage != null) {
-                                      setState(() {
-                                        image.file = File(selectedImage.path);
-                                      });
-                                    }
-                                  });
-                                },
-                                child: Container(
-                                  child: Icon(
-                                    Icons.camera,
-                                    size: 40,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                            )),
-                          ),
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                                child: Align(
-                              alignment: Alignment.center,
-                              child: InkWell(
-                                onTap: () {
-                                  StoreImage.chooseImageFile()
-                                      .then((selectedImage) {
-                                    if (selectedImage != null) {
-                                      setState(() {
-                                        image.file = File((selectedImage
-                                            .files.single.path as String));
-                                      });
-                                    }
-                                  });
-                                },
-                                child: Container(
-                                  child: Icon(
-                                    Icons.image,
-                                    size: 40,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                              ),
-                            )),
-                          ),
-                        ],
-                      ),
-                    )),
-                Expanded(
-                    flex: 8,
-                    child: Container(
-                        padding: EdgeInsets.only(
-                          left: 10,
-                          right: 10,
-                        ),
-                        child: Column(
-                          children: [
-                            TextFormField(
-                              controller: controllerTitle,
-                              keyboardType: TextInputType.emailAddress,
-                              decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                hintText: 'Enter the title',
-                              ),
-                              validator: (String? value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter some text';
-                                }
-                                return null;
-                              },
-                            ),
-                            Divider(
-                              color: Colors.white,
-                              height: 25,
-                            ),
-                            SizedBox(
-                              height: 150,
-                              child: TextFormField(
-                                maxLines: 500,
-                                controller: controllerDescription,
-                                keyboardType: TextInputType.emailAddress,
-                                decoration: const InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  hintText: 'Enter the body',
-                                ),
-                                validator: (String? value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Please enter some text';
-                                  }
-                                  return null;
-                                },
-                              ),
-                            ),
-                            Divider(
-                              color: Colors.white,
-                              height: 25,
-                            ),
-                          ],
-                        ))),
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                      child: Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.only(
-                        left: 140, right: 140, top: 15, bottom: 15),
-                    child: ElevatedButton(
-                      onPressed: () async {
-                        try {
-                          setState(() {
-                            loading = true;
-                            image.pathUrl = storeImage.pathUrl;
-                          });
-                          await widget.admin.updatePost(
-                              widget.post.postId,
-                              controllerTitle.text,
-                              controllerDescription.text,
-                              image);
-                          ControllerToastMessages.genericMessage(
-                              "Se actualizó el post!");
-                          setState(() {
-                            loading = false;
-                          });
-                          Navigator.pop(context);
-                        } catch (e) {
-                          ControllerToastMessages.genericMessage(
-                              "Hubo un error, inténtalo de nuevo");
-                          setState(() {
-                            loading = false;
-                          });
-                        }
-                      },
-                      child: Text('Actualizar'),
-                    ),
-                  )),
-                ),
-              ],
+            SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: _editPostWidget(),
+              ),
             ),
             Positioned(
               child: loading ? LoadingWidget() : Container(),
             ),
           ],
         ));
+  }
+
+  Widget _editPostWidget() {
+    final bool _hasImageFile = image.file == null;
+    final bool _hasPathUrl = storeImage.pathUrl == null;
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.cancel,
+                size: 35,
+                color: Colors.redAccent,
+              ),
+            )
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            "Editar Noticia",
+            style: GoogleFonts.roboto(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        _hasImageFile
+            ? _hasPathUrl
+                ? Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.black, width: 2)),
+                  )
+                : Container(
+                    height: 150.0,
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 2),
+                      image: DecorationImage(
+                          image: CachedNetworkImageProvider(
+                              (storeImage.pathUrl as String)),
+                          fit: BoxFit.cover),
+                    ),
+                  )
+            : Container(
+                height: 150.0,
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 2),
+                    image: DecorationImage(
+                        image: FileImage((image.file as File)),
+                        fit: BoxFit.cover)),
+              ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              IconButton(
+                onPressed: () {
+                  StoreImage.chooseImageFileFromCamera().then((selectedImage) {
+                    if (selectedImage != null) {
+                      setState(() {
+                        image.file = File(selectedImage.path);
+                      });
+                    }
+                  });
+                },
+                icon: const Icon(
+                  Icons.camera_alt,
+                  size: 40,
+                  color: Colors.black,
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  StoreImage.chooseImageFile().then((selectedImage) {
+                    if (selectedImage != null) {
+                      setState(() {
+                        image.file =
+                            File((selectedImage.files.single.path as String));
+                      });
+                    }
+                  });
+                },
+                icon: const Icon(
+                  Icons.image,
+                  size: 40,
+                  color: Colors.black,
+                ),
+              ),
+            ],
+          ),
+        ),
+        Column(
+          children: [
+            TextFormField(
+              controller: controllerTitle,
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Enter the title',
+              ),
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
+            ),
+            const SizedBox(height: 32.0),
+            TextFormField(
+              maxLines: 5,
+              controller: controllerDescription,
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: 'Enter the body',
+              ),
+              validator: (String? value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter some text';
+                }
+                return null;
+              },
+            ),
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ElevatedButton(
+            onPressed: () async {
+              try {
+                setState(() {
+                  loading = true;
+                  image.pathUrl = storeImage.pathUrl;
+                });
+                await widget.admin.updatePost(widget.post.postId,
+                    controllerTitle.text, controllerDescription.text, image);
+                ControllerToastMessages.genericMessage("Se actualizó el post!");
+                setState(() {
+                  loading = false;
+                });
+                Navigator.pop(context);
+              } catch (e) {
+                ControllerToastMessages.genericMessage(
+                    "Hubo un error, inténtalo de nuevo");
+                setState(() {
+                  loading = false;
+                });
+              }
+            },
+            child: Text('Actualizar'),
+          ),
+        )
+      ],
+    );
   }
 }

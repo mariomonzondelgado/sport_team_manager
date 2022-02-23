@@ -9,8 +9,11 @@ part 'person_model.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Person {
-  Person({required this.firstName, required this.lastName, required this.email})
-      : isAdmin = false;
+  Person({
+    required this.firstName,
+    required this.lastName,
+    required this.email,
+  }) : isAdmin = false;
 
   Person.fromDB({
     required this.firstName,
@@ -18,6 +21,18 @@ class Person {
     required this.email,
     required this.isAdmin,
   });
+
+  @JsonKey(name: 'firstName')
+  String firstName;
+
+  @JsonKey(name: 'lastName')
+  String lastName;
+
+  @JsonKey(name: 'email')
+  String email;
+
+  @JsonKey(name: 'isAdmin')
+  bool isAdmin;
 
   factory Person.fromJson(Map<String, dynamic> json) => _$PersonFromJson(json);
   Map<String, dynamic> toJson() => _$PersonToJson(this);
@@ -48,15 +63,11 @@ class Person {
       String firstName, String lastName, String email, String password) async {
     if (firstName.trim().isEmpty) {
       throw Exception(add_valid_first_name);
-    }
-
-    if (lastName.trim().isEmpty) {
+    } else if (lastName.trim().isEmpty) {
       throw Exception(add_valid_last_name);
-    }
-    if (!email.isEmail()) {
+    } else if (!email.isEmail()) {
       throw Exception(add_valid_email);
-    }
-    if (!password.isPassword()) {
+    } else if (!password.isPassword()) {
       throw Exception(add_valid_password);
     } else {
       final AuthService authService = AuthService();
@@ -73,16 +84,4 @@ class Person {
       }
     }
   }
-
-  @JsonKey(name: 'firstName')
-  String firstName;
-
-  @JsonKey(name: 'lastName')
-  String lastName;
-
-  @JsonKey(name: 'email')
-  String email;
-
-  @JsonKey(name: 'isAdmin')
-  bool isAdmin;
 }

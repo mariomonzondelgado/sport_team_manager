@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:sport_team_manager/model/admin_model.dart';
 import 'package:sport_team_manager/model/person_model.dart';
 import 'package:sport_team_manager/service/auth_service.dart';
+import 'package:sport_team_manager/ui/screen/contact_tab_screen/contact_tab_screen.dart';
 import 'package:sport_team_manager/ui/screen/events_tab_screen/event_tab_screen.dart';
 import 'package:sport_team_manager/ui/screen/news_tab_screen/news_tab_screen.dart';
 import 'package:sport_team_manager/ui/screen/roster_tab_screen/roster_tab_screen.dart';
@@ -43,15 +44,13 @@ class _TabsScreenState extends State<TabsScreen> {
       child: Scaffold(
           appBar: AppBar(
             elevation: 0.0,
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.amber,
             actions: [
               IconButton(
-                onPressed: () {
-                  _authService.signout();
-                },
+                onPressed: () => _authService.signout(),
                 icon: const Icon(
                   FontAwesomeIcons.signOutAlt,
-                  color: Colors.amber,
+                  color: Colors.black87,
                 ),
               )
             ],
@@ -121,47 +120,14 @@ class _TabsScreenState extends State<TabsScreen> {
   }
 
   Widget? screensController(Person person) {
-    if (_selectedIndex == 0) {
-      return NewsTabScreen(person: person);
-    } else if (_selectedIndex == 1) {
-      return const EventsTabScreen();
-    } else if (_selectedIndex == 2) {
-      return const RosterTabScreen();
-    } else if (_selectedIndex == 3) {
-      return const SponsorsTabScreen();
-    } else {
-      return Container(
-        child: Column(
-          children: [
-            Expanded(
-              flex: 3,
-              child: Container(),
-            ),
-            Expanded(
-              flex: 1,
-              child: Text(
-                'Index 4: Contact',
-                style: optionStyle,
-              ),
-            ),
-            Expanded(
-                flex: 1,
-                child: InkWell(
-                  child: Text(
-                    'Cerrar sesión',
-                    style: TextStyle(color: Colors.blue, fontSize: 20),
-                  ),
-                  onTap: () async {
-                    await person.signOut();
-                  },
-                )),
-            Expanded(
-              flex: 3,
-              child: Container(),
-            ),
-          ],
-        ),
-      );
-    }
+    final List<Widget> _tabScreens = [
+      NewsTabScreen(person: person),
+      const EventsTabScreen(),
+      const RosterTabScreen(),
+      const SponsorsTabScreen(),
+      const ContactTabScreen(),
+    ];
+
+    return _tabScreens[_selectedIndex];
   }
 }
