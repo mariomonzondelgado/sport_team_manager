@@ -10,11 +10,13 @@ import 'package:sport_team_manager/ui/widget/background_gradient_widget.dart';
 
 class NewsTabScreen extends ConsumerWidget {
   final Person person;
-  NewsTabScreen({required this.person});
+
+  const NewsTabScreen({Key? key, required this.person}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final database = ref.watch(databaseProvider);
+
     return Scaffold(
       floatingActionButton: Visibility(
         visible: person is Admin,
@@ -40,7 +42,7 @@ class NewsTabScreen extends ConsumerWidget {
           }
           return Stack(
             children: [
-              BackgroundGradientWidget(),
+              const BackgroundGradientWidget(),
               ListView(
                 children: snapshot.data!.docs.map((DocumentSnapshot document) {
                   Map<String, dynamic> data =
@@ -49,7 +51,7 @@ class NewsTabScreen extends ConsumerWidget {
                     title: data['title'],
                     body: data['body'],
                     image: data['image'],
-                    postId: data["postId"],
+                    postId: data['postId'],
                     person: person,
                   );
                 }).toList(),

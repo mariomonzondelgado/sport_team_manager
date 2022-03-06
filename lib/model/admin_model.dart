@@ -35,7 +35,7 @@ class Admin extends Person {
     } else {
       StorageService storageService = StorageService();
       Database database = Database();
-      image.pathUrl = await storageService.uploadPostImage(
+      image.pathUrl = await storageService.uploadImage(
           "/news/${image.file.hashCode}", (image.file as File));
       Post newPost = Post(
           title: title,
@@ -66,7 +66,7 @@ class Admin extends Person {
       if (image.file != null) {
         await storageService.deletePostImage(
             StoreImage.getImageHashCode((image.pathUrl as String)));
-        image.pathUrl = await storageService.uploadPostImage(
+        image.pathUrl = await storageService.uploadImage(
             "/news/${image.file.hashCode}", (image.file as File));
       }
       Post newPost = Post(

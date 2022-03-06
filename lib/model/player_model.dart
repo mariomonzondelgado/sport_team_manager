@@ -5,6 +5,7 @@ part 'player_model.g.dart';
 @JsonSerializable(explicitToJson: true)
 class Player {
   Player({
+    required this.playerId,
     required this.firstName,
     required this.lastName,
     required this.number,
@@ -15,6 +16,9 @@ class Player {
   factory Player.fromJson(Map<String, dynamic> json) => _$PlayerFromJson(json);
 
   Map<String, dynamic> toJson() => _$PlayerToJson(this);
+
+  @JsonKey(name: 'player_id')
+  String playerId;
 
   @JsonKey(name: 'first_name')
   String firstName;

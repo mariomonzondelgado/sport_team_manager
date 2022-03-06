@@ -54,11 +54,6 @@ class Person {
     }
   }
 
-  signOut() async {
-    final AuthService authService = AuthService();
-    await authService.signout();
-  }
-
   static signUp(
       String firstName, String lastName, String email, String password) async {
     if (firstName.trim().isEmpty) {
@@ -83,5 +78,10 @@ class Person {
         await db.addMember(person, user!.uid);
       }
     }
+  }
+
+  signOut() async {
+    final AuthService authService = AuthService();
+    await authService.signout();
   }
 }

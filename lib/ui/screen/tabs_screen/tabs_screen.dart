@@ -85,6 +85,7 @@ class _TabsScreenState extends State<TabsScreen> {
                     child: screensController(currentPerson),
                   ),
                   bottomNavigationBar: BottomNavigationBar(
+                    backgroundColor: Colors.amber,
                     items: const <BottomNavigationBarItem>[
                       BottomNavigationBarItem(
                         icon: FaIcon(FontAwesomeIcons.newspaper),
@@ -123,7 +124,7 @@ class _TabsScreenState extends State<TabsScreen> {
     final List<Widget> _tabScreens = [
       NewsTabScreen(person: person),
       const EventsTabScreen(),
-      const RosterTabScreen(),
+      RosterTabScreen(person: person),
       const SponsorsTabScreen(),
       const ContactTabScreen(),
     ];

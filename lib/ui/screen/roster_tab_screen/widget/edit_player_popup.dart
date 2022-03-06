@@ -2,14 +2,16 @@ import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sport_team_manager/model/admin_model.dart';
 import 'package:sport_team_manager/model/player_model.dart';
 import 'package:sport_team_manager/model/store_image.dart';
+import 'package:sport_team_manager/repository/content_repository.dart';
 import 'package:sport_team_manager/service/controller_toast_menssages.dart';
 import 'package:sport_team_manager/ui/widget/loading_widget.dart';
 
-class EditPlayerPopup extends StatefulWidget {
+class EditPlayerPopup extends ConsumerStatefulWidget {
   final Admin admin;
   final Player player;
 
@@ -22,7 +24,7 @@ class EditPlayerPopup extends StatefulWidget {
   _EditPlayerPopupState createState() => _EditPlayerPopupState();
 }
 
-class _EditPlayerPopupState extends State<EditPlayerPopup> {
+class _EditPlayerPopupState extends ConsumerState<EditPlayerPopup> {
   late TextEditingController _firstNameController;
   late TextEditingController _lastNameController;
   late TextEditingController _playerNumberController;
@@ -235,7 +237,8 @@ class _EditPlayerPopupState extends State<EditPlayerPopup> {
                   loading = true;
                   image.pathUrl = storeImage.pathUrl;
                 });
-                await widget.admin.updatePlayer(
+                await ContentRepository.updatePlayer(
+                  ref,
                   widget.player.playerId,
                   _firstNameController.text,
                   _lastNameController.text,

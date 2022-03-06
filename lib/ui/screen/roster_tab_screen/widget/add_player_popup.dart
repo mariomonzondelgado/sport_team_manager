@@ -1,13 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sport_team_manager/model/admin_model.dart';
 import 'package:sport_team_manager/model/store_image.dart';
+import 'package:sport_team_manager/repository/content_repository.dart';
 import 'package:sport_team_manager/service/controller_toast_menssages.dart';
 import 'package:sport_team_manager/ui/widget/loading_widget.dart';
 
-class AddPlayerPopup extends StatefulWidget {
+class AddPlayerPopup extends ConsumerStatefulWidget {
   final Admin admin;
 
   AddPlayerPopup({required this.admin});
@@ -16,7 +18,7 @@ class AddPlayerPopup extends StatefulWidget {
   _AddPlayerPopupState createState() => _AddPlayerPopupState();
 }
 
-class _AddPlayerPopupState extends State<AddPlayerPopup> {
+class _AddPlayerPopupState extends ConsumerState<AddPlayerPopup> {
   final _firstNameController = TextEditingController();
   final _lastNameController = TextEditingController();
   final _positionController = TextEditingController();
@@ -208,7 +210,8 @@ class _AddPlayerPopupState extends State<AddPlayerPopup> {
                 setState(() {
                   loading = true;
                 });
-                await widget.admin.addPlayer(
+                await ContentRepository.addPlayer(
+                    ref,
                     _firstNameController.text,
                     _lastNameController.text,
                     _positionController.text,
