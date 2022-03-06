@@ -61,8 +61,10 @@ class Database {
   }
 
   Future<bool> addEvent(Event event) async {
+    DocumentReference reference = _events.doc();
+    // event.eventId = reference.id;
     try {
-      await _events.add(event.toJson());
+      await reference.set(event.toJson());
       return true;
     } catch (e) {
       return Future.error(e); // return error
@@ -70,8 +72,10 @@ class Database {
   }
 
   Future<bool> addPlayer(Player player) async {
+    DocumentReference reference = _roster.doc();
+    player.playerId = reference.id;
     try {
-      await _roster.add(player.toJson());
+      await reference.set(player.toJson());
       return true;
     } catch (e) {
       return Future.error(e); // return error
@@ -79,8 +83,10 @@ class Database {
   }
 
   Future<bool> addSponsor(Sponsor sponsor) async {
+    DocumentReference reference = _sponsors.doc();
+    sponsor.sponsorId = reference.id;
     try {
-      await _sponsors.add(sponsor.toJson());
+      await reference.set(sponsor.toJson());
       return true;
     } catch (e) {
       return Future.error(e); // return error
@@ -94,6 +100,7 @@ class Database {
       await _news
           .doc(postId)
           .delete(); // deletes the document with id of movieId from our movies collection
+      Logger().wtf('Remote Post ==> $postId');
       return true; // return true after successful deletion .
     } catch (e) {
       Logger().e(e);
@@ -118,6 +125,7 @@ class Database {
       await _roster
           .doc(playerId)
           .delete(); // deletes the document with id of movieId from our movies collection
+      Logger().wtf('Remote Player ==> $playerId');
       return true; // return true after successful deletion .
     } catch (e) {
       Logger().e(e);
@@ -160,7 +168,7 @@ class Database {
 
   Future<bool> editPlayer(Player player, String playerId) async {
     try {
-      await _roster.doc(playerId).update(player.toJson());
+      await _roster.doc(playerId).set(player.toJson());
       return true;
     } catch (e) {
       Logger().e(e);
