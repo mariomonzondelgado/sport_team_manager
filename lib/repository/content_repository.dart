@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logger/logger.dart';
+import 'package:sport_team_manager/model/event_model.dart';
 import 'package:sport_team_manager/model/player_model.dart';
 import 'package:sport_team_manager/model/post_model.dart';
 import 'package:sport_team_manager/model/store_image.dart';
@@ -39,7 +40,7 @@ class ContentRepository {
         photo.file == null) {
       ControllerToastMessages.messageFromError(general_error);
     } else {
-      photo.pathUrl = await await ref
+      photo.pathUrl = await ref
           .read(storageServiceProvider)
           .uploadImage('/roster/${photo.file.hashCode}', (photo.file as File));
 
@@ -55,9 +56,23 @@ class ContentRepository {
     }
   }
 
+  static addEvent(WidgetRef ref, String title, String body) async {
+    if (title.trim().isEmpty || body.trim().isEmpty) {
+      ControllerToastMessages.messageFromError(general_error);
+    } else {
+      Event newEvent = Event(
+        eventId: '',
+        title: title,
+        body: body,
+      );
+
+      await ref.read(databaseProvider).addEvent(newEvent);
+    }
+  }
+
   // DELETE
   static deletePost(WidgetRef ref, String postId, String imageUrl) async {
-    Logger().wtf('Player: $postId');
+    Logger().wtf('Post: $postId');
     await ref.read(databaseProvider).removePost(postId);
     await ref
         .read(storageServiceProvider)
@@ -70,6 +85,11 @@ class ContentRepository {
     await ref
         .read(storageServiceProvider)
         .deletePlayerPhoto(StoreImage.getImageHashCode(photoUrl));
+  }
+
+  static deleteEvent(WidgetRef ref, String eventId) async {
+    Logger().wtf('Event: $eventId');
+    await ref.read(databaseProvider).removeEvent(eventId);
   }
 
   // UPDATE
@@ -141,5 +161,25 @@ class ContentRepository {
     //       photoUrl: (photo.pathUrl.toString()));
     //   await database.editPlayer(newPlayer, playerId);
     // }
+  }
+
+  static updateEvent(
+    WidgetRef ref,
+    String eventId,
+    String title,
+    String body,
+  ) async {
+    if (title.trim().isEmpty) {
+      ControllerToastMessages.genericMessage(add_valid_title);
+    } else if (body.trim().isEmpty) {
+      ControllerToastMessages.genericMessage(add_valid_description);
+    } else {
+      Event newEvent = Event(
+        eventId: eventId,
+        title: title,
+        body: body,
+      );
+      await ref.read(databaseProvider).editEvent(newEvent, eventId);
+    }
   }
 }

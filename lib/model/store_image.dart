@@ -9,9 +9,9 @@ class StoreImage {
 
   StoreImage();
 
-  StoreImage.FromFile({required this.file});
+  StoreImage.fromFile({required this.file});
 
-  StoreImage.FromUrl({required this.pathUrl});
+  StoreImage.fromUrl({required this.pathUrl});
 
   static Future<FilePickerResult?> chooseImageFile() async {
     return await FilePicker.platform.pickFiles(

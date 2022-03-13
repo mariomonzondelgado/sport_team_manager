@@ -32,7 +32,7 @@ class _EditNewsPostState extends State<EditNewsPost> {
   void initState() {
     setState(() {
       loading = false;
-      storeImage = StoreImage.FromUrl(pathUrl: widget.post.imageUrl);
+      storeImage = StoreImage.fromUrl(pathUrl: widget.post.imageUrl);
       image = StoreImage();
       controllerTitle = TextEditingController(text: widget.post.title);
       controllerDescription = TextEditingController(text: widget.post.body);

@@ -23,7 +23,7 @@ class _AddPlayerPopupState extends ConsumerState<AddPlayerPopup> {
   final _lastNameController = TextEditingController();
   final _positionController = TextEditingController();
   final _numberController = TextEditingController();
-  final controllerDescription = TextEditingController();
+
   StoreImage image = StoreImage();
   bool loading = false;
   @override
@@ -34,22 +34,23 @@ class _AddPlayerPopupState extends ConsumerState<AddPlayerPopup> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height * 0.8,
-        width: MediaQuery.of(context).size.width * 0.9,
-        color: Colors.white,
-        child: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: _addPlayerWidget(),
-              ),
+      height: MediaQuery.of(context).size.height * 0.8,
+      width: MediaQuery.of(context).size.width * 0.9,
+      color: Colors.white,
+      child: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: _addPlayerWidget(),
             ),
-            Positioned(
-              child: loading ? LoadingWidget() : Container(),
-            ),
-          ],
-        ));
+          ),
+          Positioned(
+            child: loading ? LoadingWidget() : Container(),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _addPlayerWidget() {

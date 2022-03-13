@@ -8,7 +8,6 @@ class Event {
     required this.eventId,
     required this.title,
     required this.body,
-    required this.date,
   });
 
   factory Event.fromJson(Map<String, dynamic> json) => _$EventFromJson(json);
@@ -23,7 +22,4 @@ class Event {
 
   @JsonKey(name: 'body')
   String body;
-
-  @JsonKey(name: 'date')
-  DateTime date;
 }

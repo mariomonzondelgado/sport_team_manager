@@ -173,7 +173,7 @@ class _AddNewsPopUpState extends State<AddNewsPopUp> {
             onPressed: () async {
               try {
                 setState(() {
-                  this.loading = true;
+                  loading = true;
                 });
                 await widget.admin.addPost(
                     controllerTitle.text, controllerDescription.text, image);

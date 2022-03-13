@@ -38,7 +38,7 @@ class _EditPlayerPopupState extends ConsumerState<EditPlayerPopup> {
     setState(() {
       loading = false;
       image = StoreImage();
-      storeImage = StoreImage.FromUrl(pathUrl: widget.player.photoUrl);
+      storeImage = StoreImage.fromUrl(pathUrl: widget.player.photoUrl);
       _firstNameController =
           TextEditingController(text: widget.player.firstName);
       _lastNameController = TextEditingController(text: widget.player.lastName);
@@ -53,22 +53,23 @@ class _EditPlayerPopupState extends ConsumerState<EditPlayerPopup> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height * 0.8,
-        width: MediaQuery.of(context).size.width * 0.9,
-        color: Colors.white,
-        child: Stack(
-          children: [
-            SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: _editPlayerWidget(),
-              ),
+      height: MediaQuery.of(context).size.height * 0.8,
+      width: MediaQuery.of(context).size.width * 0.9,
+      color: Colors.white,
+      child: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: _editPlayerWidget(),
             ),
-            Positioned(
-              child: loading ? LoadingWidget() : Container(),
-            ),
-          ],
-        ));
+          ),
+          Positioned(
+            child: loading ? LoadingWidget() : Container(),
+          ),
+        ],
+      ),
+    );
   }
 
   Widget _editPlayerWidget() {

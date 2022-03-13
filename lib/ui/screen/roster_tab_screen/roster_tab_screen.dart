@@ -54,7 +54,7 @@ class RosterTabScreen extends ConsumerWidget {
                     lastName: data['last_name'],
                     playerPosition: data['position'],
                     playerNumber: data['number'],
-                    playerId: data['playerId'] ?? '',
+                    playerId: data['player_id'] ?? '',
                     person: person,
                   );
                 }).toList(),
@@ -72,9 +72,9 @@ class RosterTabScreen extends ConsumerWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          insetPadding: EdgeInsets.all(10),
-          contentPadding: EdgeInsets.all(0),
-          shape: RoundedRectangleBorder(
+          insetPadding: const EdgeInsets.all(10),
+          contentPadding: const EdgeInsets.all(0),
+          shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(10.0))),
           content: Builder(
             builder: (context) {

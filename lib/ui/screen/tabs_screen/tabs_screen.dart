@@ -42,22 +42,22 @@ class _TabsScreenState extends State<TabsScreen> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-          appBar: AppBar(
-            elevation: 0.0,
-            backgroundColor: Colors.amber,
-            actions: [
-              IconButton(
-                onPressed: () => _authService.signout(),
-                icon: const Icon(
-                  FontAwesomeIcons.signOutAlt,
-                  color: Colors.black87,
-                ),
-              )
-            ],
-          ),
-          resizeToAvoidBottomInset: false,
-          body: SafeArea(
-              child: StreamBuilder(
+        appBar: AppBar(
+          elevation: 0.0,
+          backgroundColor: Colors.amber,
+          actions: [
+            IconButton(
+              onPressed: () => _authService.signout(),
+              icon: const Icon(
+                FontAwesomeIcons.signOutAlt,
+                color: Colors.black87,
+              ),
+            )
+          ],
+        ),
+        resizeToAvoidBottomInset: false,
+        body: SafeArea(
+          child: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection("members")
                 .doc(widget.memberId)
@@ -116,14 +116,16 @@ class _TabsScreenState extends State<TabsScreen> {
                 );
               }
             },
-          ))),
+          ),
+        ),
+      ),
     );
   }
 
   Widget? screensController(Person person) {
     final List<Widget> _tabScreens = [
       NewsTabScreen(person: person),
-      const EventsTabScreen(),
+      EventsTabScreen(person: person),
       RosterTabScreen(person: person),
       const SponsorsTabScreen(),
       const ContactTabScreen(),

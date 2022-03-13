@@ -53,7 +53,6 @@ class Database {
       DocumentReference reference = _news.doc();
       post.postId = reference.id;
       await reference.set(post.toJson());
-      //await _news.add(post.toJson());
       return true;
     } catch (e) {
       return Future.error(e); // return error
@@ -61,9 +60,9 @@ class Database {
   }
 
   Future<bool> addEvent(Event event) async {
-    DocumentReference reference = _events.doc();
-    // event.eventId = reference.id;
     try {
+      DocumentReference reference = _events.doc();
+      event.eventId = reference.id;
       await reference.set(event.toJson());
       return true;
     } catch (e) {
