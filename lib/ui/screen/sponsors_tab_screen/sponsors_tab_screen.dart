@@ -27,6 +27,11 @@ class SponsorsTabScreen extends ConsumerWidget {
             return SponsorCardWidget(
               name: data['name'],
               description: data['description'],
+              logo: data['logo'],
+              facebook: data['facebook'],
+              twitter: data['twitter'],
+              instagram: data['instagram'],
+              phone: data['phone'],
             );
           }).toList(),
         );

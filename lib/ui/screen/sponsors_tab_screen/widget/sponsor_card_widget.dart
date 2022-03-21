@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:sport_team_manager/generated/assets.dart';
 import 'package:sport_team_manager/util/url_launcher_util.dart';
 
 class SponsorCardWidget extends StatelessWidget {
@@ -9,6 +8,7 @@ class SponsorCardWidget extends StatelessWidget {
     Key? key,
     required this.name,
     required this.description,
+    this.logo,
     this.facebook,
     this.instagram,
     this.twitter,
@@ -19,6 +19,7 @@ class SponsorCardWidget extends StatelessWidget {
 
   final String name;
   final String description;
+  final String? logo;
   final String? facebook, instagram, twitter, email, whatsapp, phone;
 
   @override
@@ -35,9 +36,18 @@ class SponsorCardWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SponsorLogo(),
+            SponsorLogo(
+              logo: logo,
+            ),
             SponsorNameWidget(name: name),
-            SponsorSocialButtons(),
+            SponsorSocialButtons(
+              facebook: facebook,
+              instagram: instagram,
+              twitter: twitter,
+              email: email,
+              whatsapp: phone,
+              phone: phone,
+            ),
             SponsorDescriptionWidget(description: description),
           ],
         ),
@@ -133,21 +143,26 @@ class SponsorSocialButtons extends StatelessWidget {
 class SponsorLogo extends StatelessWidget {
   const SponsorLogo({
     Key? key,
+    this.logo,
   }) : super(key: key);
+
+  final String? logo;
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.only(
+      borderRadius: const BorderRadius.only(
         topLeft: Radius.circular(8.0),
         topRight: Radius.circular(8.0),
       ),
-      child: Image.asset(
-        Assets.imagesPlaceholder,
-        fit: BoxFit.cover,
-        width: 600,
-        height: 240,
-      ),
+      child: logo != null && logo!.isNotEmpty
+          ? Image.network(
+              logo!,
+              fit: BoxFit.cover,
+              width: 600,
+              height: 240,
+            )
+          : const SizedBox.shrink(),
     );
   }
 }

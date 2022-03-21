@@ -47,45 +47,153 @@ class ContactTabScreen extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              IconButton(
-                iconSize: 32.0,
-                onPressed: () => UrlLauncherUtils.openUrl(_facebookUrl),
-                icon: const Icon(FontAwesomeIcons.facebook),
-              ),
-              IconButton(
-                iconSize: 32.0,
-                onPressed: () => UrlLauncherUtils.openUrl(_instagramUrl),
-                icon: const Icon(FontAwesomeIcons.instagram),
-              ),
-              IconButton(
-                iconSize: 32.0,
-                onPressed: () => UrlLauncherUtils.openUrl(_twitterUrl),
-                icon: const Icon(FontAwesomeIcons.twitter),
-              ),
+              _facebookBtn(_facebookUrl),
+              _instagramBtn(_instagramUrl),
+              _twitterBtn(_twitterUrl),
             ],
           ),
           const SizedBox(height: 16.0),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              IconButton(
-                iconSize: 32.0,
-                onPressed: () => UrlLauncherUtils.openMap(0, 0),
-                icon: const Icon(FontAwesomeIcons.locationArrow),
-              ),
-              IconButton(
-                iconSize: 32.0,
-                onPressed: () => UrlLauncherUtils.mailTo(_email),
-                icon: const Icon(FontAwesomeIcons.mailBulk),
-              ),
-              IconButton(
-                iconSize: 32.0,
-                onPressed: () => UrlLauncherUtils.call(_phoneNumber),
-                icon: const Icon(FontAwesomeIcons.phone),
-              ),
+              _mapBtn(),
+              _mailBtn(_email),
+              _phoneBtn(_phoneNumber),
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _phoneBtn(String _phoneNumber) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100.0),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            offset: Offset.fromDirection(1.0),
+            blurRadius: 10.0,
+            blurStyle: BlurStyle.outer,
+          ),
+        ],
+      ),
+      child: IconButton(
+        iconSize: 32.0,
+        enableFeedback: true,
+        onPressed: () => UrlLauncherUtils.call(_phoneNumber),
+        icon: const Icon(FontAwesomeIcons.phone),
+      ),
+    );
+  }
+
+  Widget _mailBtn(String _email) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100.0),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            offset: Offset.fromDirection(1.0),
+            blurRadius: 10.0,
+            blurStyle: BlurStyle.outer,
+          ),
+        ],
+      ),
+      child: IconButton(
+        iconSize: 32.0,
+        enableFeedback: true,
+        onPressed: () => UrlLauncherUtils.mailTo(_email),
+        icon: const Icon(FontAwesomeIcons.mailBulk),
+      ),
+    );
+  }
+
+  Widget _mapBtn() {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100.0),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            offset: Offset.fromDirection(1.0),
+            blurRadius: 10.0,
+            blurStyle: BlurStyle.outer,
+          ),
+        ],
+      ),
+      child: IconButton(
+        iconSize: 32.0,
+        enableFeedback: true,
+        onPressed: () => UrlLauncherUtils.openMap(0, 0),
+        icon: const Icon(FontAwesomeIcons.locationArrow),
+      ),
+    );
+  }
+
+  Widget _twitterBtn(String _twitterUrl) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100.0),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            offset: Offset.fromDirection(1.0),
+            blurRadius: 10.0,
+            blurStyle: BlurStyle.outer,
+          ),
+        ],
+      ),
+      child: IconButton(
+        iconSize: 32.0,
+        enableFeedback: true,
+        onPressed: () => UrlLauncherUtils.openUrl(_twitterUrl),
+        icon: const Icon(FontAwesomeIcons.twitter),
+      ),
+    );
+  }
+
+  Widget _instagramBtn(String _instagramUrl) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100.0),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            offset: Offset.fromDirection(1.0),
+            blurRadius: 10.0,
+            blurStyle: BlurStyle.outer,
+          ),
+        ],
+      ),
+      child: IconButton(
+        iconSize: 32.0,
+        enableFeedback: true,
+        onPressed: () => UrlLauncherUtils.openUrl(_instagramUrl),
+        icon: const Icon(FontAwesomeIcons.instagram),
+      ),
+    );
+  }
+
+  Widget _facebookBtn(String _facebookUrl) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100.0),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            offset: Offset.fromDirection(1.0),
+            blurRadius: 10.0,
+            blurStyle: BlurStyle.outer,
+          ),
+        ],
+      ),
+      child: IconButton(
+        iconSize: 32.0,
+        enableFeedback: true,
+        onPressed: () => UrlLauncherUtils.openUrl(_facebookUrl),
+        icon: const Icon(FontAwesomeIcons.facebook),
       ),
     );
   }
