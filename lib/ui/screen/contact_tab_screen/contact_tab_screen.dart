@@ -47,18 +47,34 @@ class ContactTabScreen extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              IconButton(
-                iconSize: 32.0,
-                onPressed: () => UrlLauncherUtils.openUrl(_facebookUrl),
-                icon: const Icon(FontAwesomeIcons.facebook),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100.0),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      offset: Offset.fromDirection(1.0),
+                      blurRadius: 10.0,
+                      blurStyle: BlurStyle.outer,
+                    ),
+                  ],
+                ),
+                child: IconButton(
+                  iconSize: 32.0,
+                  enableFeedback: true,
+                  onPressed: () => UrlLauncherUtils.openUrl(_facebookUrl),
+                  icon: const Icon(FontAwesomeIcons.facebook),
+                ),
               ),
               IconButton(
                 iconSize: 32.0,
+                enableFeedback: true,
                 onPressed: () => UrlLauncherUtils.openUrl(_instagramUrl),
                 icon: const Icon(FontAwesomeIcons.instagram),
               ),
               IconButton(
                 iconSize: 32.0,
+                enableFeedback: true,
                 onPressed: () => UrlLauncherUtils.openUrl(_twitterUrl),
                 icon: const Icon(FontAwesomeIcons.twitter),
               ),
@@ -70,16 +86,19 @@ class ContactTabScreen extends ConsumerWidget {
             children: [
               IconButton(
                 iconSize: 32.0,
+                enableFeedback: true,
                 onPressed: () => UrlLauncherUtils.openMap(0, 0),
                 icon: const Icon(FontAwesomeIcons.locationArrow),
               ),
               IconButton(
                 iconSize: 32.0,
+                enableFeedback: true,
                 onPressed: () => UrlLauncherUtils.mailTo(_email),
                 icon: const Icon(FontAwesomeIcons.mailBulk),
               ),
               IconButton(
                 iconSize: 32.0,
+                enableFeedback: true,
                 onPressed: () => UrlLauncherUtils.call(_phoneNumber),
                 icon: const Icon(FontAwesomeIcons.phone),
               ),
