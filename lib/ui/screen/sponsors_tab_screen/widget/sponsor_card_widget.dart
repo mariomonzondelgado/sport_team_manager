@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:logger/logger.dart';
 import 'package:sport_team_manager/util/url_launcher_util.dart';
 
 class SponsorCardWidget extends StatelessWidget {
@@ -24,6 +25,7 @@ class SponsorCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Logger().wtf(facebook);
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Card(
@@ -82,7 +84,7 @@ class SponsorSocialButtons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         Visibility(
-          visible: !hasFacebook,
+          visible: hasFacebook,
           child: IconButton(
             onPressed: () {
               UrlLauncherUtils.openUrl(facebook!);
@@ -91,7 +93,7 @@ class SponsorSocialButtons extends StatelessWidget {
           ),
         ),
         Visibility(
-          visible: !hasTwitter,
+          visible: hasTwitter,
           child: IconButton(
             onPressed: () {
               UrlLauncherUtils.openUrl(twitter!);
@@ -100,7 +102,7 @@ class SponsorSocialButtons extends StatelessWidget {
           ),
         ),
         Visibility(
-          visible: !hasInstagram,
+          visible: hasInstagram,
           child: IconButton(
             onPressed: () {
               UrlLauncherUtils.openUrl(instagram!);
@@ -109,7 +111,7 @@ class SponsorSocialButtons extends StatelessWidget {
           ),
         ),
         Visibility(
-          visible: !hasWhatsapp,
+          visible: hasWhatsapp,
           child: IconButton(
             onPressed: () {
               UrlLauncherUtils.openUrl(whatsapp!);
@@ -118,7 +120,7 @@ class SponsorSocialButtons extends StatelessWidget {
           ),
         ),
         Visibility(
-          visible: !hasMail,
+          visible: hasMail,
           child: IconButton(
             onPressed: () {
               UrlLauncherUtils.mailTo(email!);
@@ -127,7 +129,7 @@ class SponsorSocialButtons extends StatelessWidget {
           ),
         ),
         Visibility(
-          visible: !hasPhone,
+          visible: hasPhone,
           child: IconButton(
             onPressed: () {
               UrlLauncherUtils.call(phone!);
@@ -158,7 +160,7 @@ class SponsorLogo extends StatelessWidget {
       child: logo != null && logo!.isNotEmpty
           ? Image.network(
               logo!,
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
               width: 600,
               height: 240,
             )

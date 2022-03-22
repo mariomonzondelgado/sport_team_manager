@@ -126,7 +126,10 @@ class ContactTabScreen extends ConsumerWidget {
       child: IconButton(
         iconSize: 32.0,
         enableFeedback: true,
-        onPressed: () => UrlLauncherUtils.openMap(0, 0),
+        onPressed: () => UrlLauncherUtils.openMap(
+          27.947153,
+          -15.3934516,
+        ),
         icon: const Icon(FontAwesomeIcons.locationArrow),
       ),
     );

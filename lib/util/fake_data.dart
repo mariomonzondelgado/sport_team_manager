@@ -15,3 +15,6 @@ const String fakeSponsorDescription =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed commodo '
     'vestibulum est vel accumsan. Vestibulum nec lectus ligula. Etiam pretium '
     'tempus leo a ultrices. Aliquam interdum accumsan erat. Duis vel neque ';
+
+const String enigmaImage =
+    'https://firebasestorage.googleapis.com/v0/b/telde-canes.appspot.com/o/sponsors%2FfspNhLhIl0PGUU3mDCqs.jpg?alt=media&token=0ce9eade-f3b0-40ee-90e4-2e11c6ffdcc1';

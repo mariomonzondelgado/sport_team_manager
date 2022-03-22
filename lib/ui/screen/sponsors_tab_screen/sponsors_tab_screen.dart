@@ -32,6 +32,7 @@ class SponsorsTabScreen extends ConsumerWidget {
               twitter: data['twitter'],
               instagram: data['instagram'],
               phone: data['phone'],
+              email: data['mail'],
             );
           }).toList(),
         );
